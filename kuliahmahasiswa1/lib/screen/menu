@@ -1,0 +1,66 @@
+import 'package:flutter/material.dart';
+
+class menu extends StatefulWidget {
+  const menu({key? key}) :super(key: key);
+
+  @override
+  State<menu> createState() => _menuState();
+}
+
+class _menuState extends State<menu> {
+  final List<String> list = [];
+
+  @override
+  Widget build(BuildContext context){
+
+   return Scaffold(
+      backgroundColor: Colors.blue[50],
+      appBar: AppBar(
+        title: Text('Mata Kuliah Pendidikan Teknologi Informasi'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              setState((){
+                list.clear();
+              });
+            },
+            icon: const Icon(Icons.delete)
+          )
+        ],
+      ), //AppBar
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index){
+          return Card(
+            child: ListTile(
+              leading: const CircleAvatar(
+                child: FlutterLogo(),
+                radius: 24,
+              ), //CircleAvatar
+              title: Text("${list[index]} ${index + 1}"),
+              subtitle: const Text('Pendidikan Teknologi Informasi'),
+              trailing: IconButton(
+                icon: Icon(Icons.chevron_right),
+                onPressed: () {},
+              )
+            )
+          );
+        }), //ListView.builder
+      floatingActionButton: floatingActionButton(
+        onPressed: () {
+          setState(() {
+              list.add('Mata Kuliah');
+          });
+        },
+        child: Icon(Icons.add),
+      ), //FloatingActionButton
+      bottomNavigatorBar: bottomNavigatorBar[
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label:'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.board_filled), label: 'History'),
+          BottomNavigationBarItem(icon: Icon(Icons.people_alt_sharp), label: 'Account'),
+        ],
+      ], //BottomNavigationBar
+    );  //Scaffold
+  }
+}
